@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ListNode(val, next) {
+            this.val = (val===undefined ? 0 : val)
+            this.next = (next===undefined ? null : next)
+        }
+        var mergeTwoLists = function(l1, l2) {
+            // 虚拟头结点
+            var dummy = new ListNode(-1), p = dummy;
+            debugger;
+            var p1 = l1, p2 = l2;
+            while (p1 !== null && p2 !== null) {
+                // 比较 p1 和 p2 两个指针
+                // 将值较小的的节点接到 p 指针
+                if (p1.val > p2.val) {
+                    p.next = p2;
+                    p2 = p2.next;
+                } else {
+                    p.next = p1;
+                    p1 = p1.next;
+                }
+                // p 指针不断前进
+                p = p.next;
+            }
+            if (p1 !== null) {
+                p.next = p1;
+            }
+            if (p2 !== null) {
+                p.next = p2;
+            }
+            return dummy.next;
+        };
+        let l1 = [1,2,4], l2 = [1,3,4];
+        class ListStack {
+            constructor (val) {
+                this.val = val
+                this.next = null
+            }
+            // 将数组转化为链表结构
+            static arrayToListNode (arr) {
+                if (arr.length === 0) return null
+                // 生成链表的根节点
+                // eslint-disable-next-line new-cap
+                let root = new ListStack(arr[0])
+                // 记录上一个节点
+                let pre = root
+                for (let i = 1; i < arr.length; i++) {
+                    // eslint-disable-next-line new-cap
+                    let node = new ListStack(arr[i])
+                    // 创建连接关系 将前一个结点的NEXT设置为当前节点
+                    pre.next = node
+                    // 更新pre为当前节点 下一个要处理的节点
+                    pre = node
+                }
+                return root
+            }
+        }
+        mergeTwoLists(ListStack.arrayToListNode(l1), ListStack.arrayToListNode(l2));
+    </script>
+</body>
+</html>
