@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- https://leetcode.cn/problems/3sum/solution/san-shu-zhi-he-by-leetcode-solution/ -->
+    <script>
+        /**
+         * @param {number[]} nums
+         * @return {number[][]}
+         */
+        var threeSum = function(nums) {
+            const n = nums.length;
+            nums.sort((a, b) => a - b);
+            const ans = [];
+            for (let first = 0; first < n; first++) {
+                if (first > 0 && nums[first] === nums[first - 1]) {
+                    continue;
+                }
+                let third = n - 1;
+                let target = nums[first];
+                for (let second = first + 1; second < n; second++) {
+                    if (second > first + 1 && nums[second] === nums[second - 1]) {
+                        continue;
+                    }
+                    while (second < third && nums[second] + nums[third] > -target) {
+                        third = third - 1;
+                    }
+                    if (second === third) {
+                        break;
+                    }
+                    if (nums[second] + nums[third] + target === 0) {
+                        let list = [];
+                        list.push(nums[first]);
+                        list.push(nums[second]);
+                        list.push(nums[third]);
+                        ans.push(list);
+
+                    }
+                }
+            }
+            return ans;
+        };
+        console.log(threeSum([3, 1, 2, 1, 5, -3]));
+    </script>
+</body>
+</html>

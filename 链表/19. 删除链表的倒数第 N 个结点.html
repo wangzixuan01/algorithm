@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // https://leetcode.cn/problems/remove-nth-node-from-end-of-list/solution/jsshua-ti-mian-shi-ti-jie-by-distracted-hbc3p/
+        // Definition for singly-linked list.
+        function ListNode(val, next) {
+            this.val = (val===undefined ? 0 : val)
+            this.next = (next===undefined ? null : next)
+        }
+        /**
+         * @param {ListNode} head
+         * @param {number} n
+         * @return {ListNode}
+         */
+        var removeNthFromEnd = function(head, n) {
+            if (!head || !n) {
+                return head;
+            }
+            let slow = head;
+            let quick = head;
+            let temp = null;
+            n = n - 1;
+
+            // 快指针循环
+            while(quick && n) {
+                quick = quick.next;
+                n--;
+            }
+            if (!quick) {
+                return head;
+            }
+
+            // 慢指针循环
+            while(quick.next) {
+                temp = slow;
+                quick = quick.next;
+                slow = slow.next;
+            }
+            if (temp) {
+                temp.next = slow.next;
+            }
+            else {
+                head = slow.next;
+            }
+            return head;
+
+        };
+    </script>
+</body>
+</html>
