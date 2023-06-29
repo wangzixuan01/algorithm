@@ -6,6 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        function getS() {
+            return 's';
+        }
+        async function testA() {
+            setTimeout(() => {
+                Promise.resolve('hello');
+            }, 100)
+        }
+        async function test() {
+            const v1 = await getS();
+            const v2 = await testA();
+            console.log(v1, v2);
+        }
+        test();
+    </script>
 </body>
 </html>
