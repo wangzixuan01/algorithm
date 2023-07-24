@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var canJump = function(nums) {
+            let reach = 0;
+            let n = nums.length;
+            for (let i = 0; i <= reach && reach < n - 1; i++) {
+                reach = Math.max(i + nums[i], reach);
+            }
+            return reach >= n - 1;
+        }
+        const nums = [2,3,1,1,4];
+        const nums2 = [3,2,1,0,4]
+
+        console.log(canJump(nums));
+        console.log(canJump(nums2));
+    </script>
+</body>
+</html>

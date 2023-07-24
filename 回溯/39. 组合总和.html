@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 题目：https://leetcode.cn/problems/combination-sum/ -->
+    <!-- 题解：https://leetcode.cn/problems/combination-sum/solution/zu-he-zong-he-by-leetcode-solution/ -->
+
+    <script>
+        /**
+         * @param {number[]} candidates
+         * @param {number} target
+         * @return {number[][]}
+         */
+        var combinationSum = function(candidates, target) {
+            const ans = [];
+            const dfs = (target, combine, idx, x) => {
+                console.log(target, combine, idx, x)
+                if (idx === candidates.length) {
+                    return;
+                }
+                if (target === 0) {
+                    ans.push(combine);
+                    return;
+                }
+
+                dfs(target, combine, idx + 1);
+                if (target - candidates[idx] >= 0) {
+                    dfs(target - candidates[idx], [...combine, candidates[idx]], idx, 'x');
+                }
+            }
+            dfs(target, [], 0);
+            console.log(ans, 'ans')
+            return ans;
+        };
+        const candidates = [2,3,6,7]; const target = 7;
+        combinationSum(candidates, target);
+    </script>
+</body>
+</html>

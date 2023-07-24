@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 题目：https://leetcode.cn/problems/permutations/
+
+        // 回溯法：一种通过探索所有可能的候选解来找出所有的解的算法。如果候选解被确认不是一个解（或者至少不是最后一个解），回溯算法会通过在上一步进行一些变化抛弃该解，即回溯并且再次尝试。
+        /**
+         * @param {number[]} nums
+         * @return {number[][]}
+         */
+        var permute = function(nums) {
+            let res = [];
+            let output = [];
+            for (let i = 0; i < nums.length; i++) {
+                output.push(nums[i]);
+            }
+            let n = nums.length;
+            console.log(output, 'output')
+            backtrack(n, output, res, 0);
+            return res;
+
+        };
+        var swap = function(arr, i, j) {
+            let tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+        }
+
+        var backtrack =  function(n, output, res, first) {
+            if (first === n) {
+                let ot = JSON.parse(JSON.stringify(output));
+                res.push(ot);
+            }
+            for (let i = first; i < n; i++) {
+                swap(output, first, i);
+                backtrack(n, output, res, first + 1);
+                swap(output, first, i);
+            }
+        }
+
+        console.log(permute([1,2,3]));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        Function.prototype.myCall = function(ctx, ...args) {
+            // 参数归一化
+            ctx = ctx === undefined || ctx === null ? globalThis : Object(ctx);
+            // ctx 一定是对象
+            const fn = this; // 待执行的函数
+            // 用synbol做属性名
+            const key = Symbol('key');
+            Object.defineProperty(ctx, key, {
+                enumerable: false,
+                value: fn
+            });
+            const result = ctx[key](...args); // 执行函数
+            delete ctx[key];
+            return result;
+        }
+
+        Function.prototype.myBind = function(ctx,...args) {
+            
+        }
+    </script>
+</body>
+</html>
